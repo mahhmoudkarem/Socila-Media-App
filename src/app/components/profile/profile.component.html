@@ -1,0 +1,122 @@
+<app-navbar></app-navbar>
+
+
+<main class="bg-[#F2F2F2] w-full min-h-screen p-6  md:p-10   ">
+
+    <h2 class="text-2xl font-bold mb-6">Profile Data : </h2>
+
+    <section class="flex md:flex-row flex-col md:justify-between  gap-10 md:gap-0 items-center md:items-start  ">
+
+
+        <div class="flex md:gap-12 flex-col gap-6 order-1">
+
+        
+
+
+
+
+
+            <div class="relative">
+    
+                
+                <img class="w-[150px] z-10 h-[150px] rounded-full border-blue-600 border-4 hover:border-b-blue-700 cursor-pointer"
+                    [src]=" savedFile ? savedFile : userData.photo" alt="profile-img">
+    
+                <form class="absolute top-0 z-0 left-0 w-[150px]  flex justify-center items-center flex-col" >
+    
+                    <input id="profileImageUpload" (change)="changeFile($event)"
+                        class="w-[150px] h-[150px] text-transparent rounded-full border-blue-600 border-4 hover:border-b-blue-700 cursor-pointer"
+                        type="file" title="Upload your profile image">
+    
+    
+    
+                </form>
+                <div class="w-[150px] text-center">
+                    <span class="text-gray-400 text-xs">To change your profile image click here</span>
+                    <br>
+                    @if (err) {
+                        <span class="text-red-600 text-xs">Please upload your profile image</span>
+    
+                    }
+                    <button (click)="changePhoto()" type="button" class="w-full text-white bg-blue-700  hover:bg-blue-800 focus:ring-4 focus:outline-none  font-medium rounded-lg text-sm px-5 py-2.5 text-center ">Save</button>
+                </div>
+    
+            </div>
+        </div>
+    
+    
+    
+    
+    
+    
+    
+    
+        <div class="order-3 md:order-2 w-full md:w-1/2 lg:w-[40%]">
+            <h2 class="text-3xl font-bold mb-4 text-center text-blue-600"  >Posts</h2>
+
+            @for ( post of userPosts; track post._id) {
+                <div  class="bg-white  rounded-md  w-full flex flex-col items-center gap-3 p-4 border-b-2 border-gray-300">
+                  <div routerLink="/post/{{post._id}}" class="w-full cursor-pointer flex items-center gap-3">
+                    <img class="w-10 h-10 rounded-full" [src]="post.user.photo" alt="profile" />
+                    <div>
+                      <p class="font-bold">{{post.user.name}}</p>
+                      <span class="font-light text-gray-500">{{post.createdAt | date  }}</span>
+                    </div>
+                  </div>
+            
+                  @if (post.body) {
+                    <p class="self-start">{{ post.body }}</p>
+                  }
+            
+                  @if (post.image) {
+                    <div>
+                      <img class="w-full mb-4" [src]="post.image" alt="post" />
+                    </div>
+                  }
+            
+                  <button #showCommnets type="button" class="bg-white text-blue-600">Show Comments</button>
+          
+                  <!-- Comments -->
+          
+                  @defer (on interaction(showCommnets)) {
+                    <app-comments [postId]="post._id"></app-comments>
+                  }
+                  @loading {
+                    <p class="text-lg font-medium">Loading.......</p>
+                  }
+                </div>
+              }
+        </div>
+    
+    
+    
+    
+    
+    
+    
+        <div class="flex flex-col gap-5 mt-[70px] md:mt-0 order-2 md:order-3">
+            <p class="font-bold">
+                Name :
+                <span>{{userData.name}}</span>
+            </p>
+            <p class="font-bold">
+                E-mail :
+                <span>{{userData.email}}</span>
+            </p>
+            <p class="font-bold">
+                Birth Of Date :
+                <span>{{userData.dateOfBirth}}</span>
+            </p>
+            <p class="font-bold">
+                Gender :
+                <span>{{userData.gender}}</span>
+            </p>
+    
+    
+        </div>
+    </section>
+
+
+
+
+</main>

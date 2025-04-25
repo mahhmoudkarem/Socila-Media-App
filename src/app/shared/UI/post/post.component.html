@@ -1,0 +1,74 @@
+<app-navbar></app-navbar>
+
+
+<section class="h-5 w-full bg-[#F2F2F2]"></section>
+
+<section >
+    <div class="bg-[#F2F2F2] flex flex-col items-center w-full min-h-screen ">
+        <div  class="bg-white  rounded-md w-[90%] md:w-1/2 lg:w-[40%] flex flex-col items-center gap-3 p-4 border-b-2 border-gray-300">
+            <div  class="w-full flex items-center gap-3 ">
+              <img class="w-10 h-10 rounded-full" [src]="post.user.photo" alt="profile" />
+              <div>
+                <p class="font-bold">{{post.user.name}}</p>
+                <span class="font-light text-gray-500">{{post.createdAt | date  }}</span>
+              </div>
+            </div>
+      
+            @if (post.body) {
+              <p class="self-start">{{ post.body }}</p>
+            }
+      
+            @if (post.image) {
+              <div>
+                <img class="w-full mb-4" [src]="post.image" alt="post" />
+              </div>
+            }
+      
+    
+    
+            <div class="w-full">
+
+                          <!-- add comment -->
+        
+            
+        <form [formGroup]="commentForm" (ngSubmit)="sendComment()" >
+          <label for="chat" class="sr-only">Your comment</label>
+          <div class="flex items-center px-3 py-2 rounded-lg bg-[#F2F2F2]">
+      
+              <textarea formControlName="content" id="chat" rows="1" class="block mx-4 p-2.5 w-full text-sm text-gray-900 bg-white rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 " placeholder="Your comment..."></textarea>
+                  <button type="submit" class="inline-flex justify-center p-2 text-blue-600 rounded-full cursor-pointer hover:bg-blue-100 ">
+                  <svg class="w-5 h-5 rotate-90 rtl:-rotate-90" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 18 20">
+                      <path d="m17.914 18.594-8-18a1 1 0 0 0-1.828 0l-8 18a1 1 0 0 0 1.157 1.376L8 18.281V9a1 1 0 0 1 2 0v9.281l6.758 1.689a1 1 0 0 0 1.156-1.376Z"/>
+                  </svg>
+                  <span class="sr-only">Send comment</span>
+              </button>
+          </div>
+      </form>
+
+
+              <div class="flex flex-col gap-3 mt-3">
+                @for (comment of commentList; track comment._id) {
+            
+                    <div class="bg-[#F2F2F2] rounded-md p-3 border-gray-300 w-[100%] ">
+            
+                        <div class="flex gap-3 items-center">
+                            <img class="w-7 h-7 rounded-full" [src]="comment.commentCreator.photo" alt="">
+                            <p class="font-medium">{{comment.commentCreator.name}}</p>
+                            <span class="font-light text-gray-500">{{comment.createdAt | date}}</span>
+                        </div>
+                    
+                        <p class="text-gray-700 mt-4">{{comment.content}}</p>
+                    
+                    </div>
+                }
+            </div>
+
+            
+            
+
+              
+            </div>
+          </div>
+    </div>
+    
+</section>

@@ -1,0 +1,20 @@
+<section class="bg-[#F2F2F2] py-8 flex flex-col items-center h-screen">
+    <h1 class="font-bold text-3xl text-blue-600 mb-5" >Linked Posts</h1>
+
+    <div class="form bg-white w-3/4 rounded-md shadow-md p-7">
+        <h2 class="text-2xl font-semibold text-blue-600 mb-4">Login Now</h2>
+        <form [formGroup]="login" (ngSubmit)="loginUser()">
+
+            <input class="w-full focus:border-blue-600 focus:border-[1.5px] placeholder:text-gray-400 rounded-md bg-[#F2F2F2] border-[#F2F2F2] mb-6" type="email" formControlName="email" placeholder="Type your email...">
+            <input class="w-full focus:border-blue-600 focus:border-[1.5px] placeholder:text-gray-400 rounded-md bg-[#F2F2F2] border-[#F2F2F2]" type="password" formControlName="password" placeholder="Type your password...">
+            @if (err) {
+                <p class="text-red-500 text-center mt-6">Email or password is incorrect</p>
+            }
+            <button type="submit" class="text-white bg-blue-600 rounded-md p-2 px-5 mt-6">Signin</button>
+        </form>
+
+        <p class="font-semibold text-gray-500 mt-4">Not registered? <span class="text-blue-600 cursor-pointer hover:text-blue-700" routerLink="/signup">Create account</span></p>
+    </div>
+
+
+</section>

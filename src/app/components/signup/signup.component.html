@@ -1,0 +1,136 @@
+<section class="bg-[#F2F2F2] py-5 flex flex-col items-center ">
+    <h1 class="font-bold text-3xl text-blue-600 mb-5">Linked Posts</h1>
+  
+    <div class="form bg-white w-3/4 rounded-md shadow-md p-5">
+      <h2 class="text-2xl font-semibold text-blue-600 mb-4">Signup Now</h2>
+  
+      <form [formGroup]="signupForm" (ngSubmit)="signup()">
+  
+        <!-- Name -->
+        <div class="mb-4">
+            <input
+            class="w-full focus:border-blue-600 focus:border-[1.5px] placeholder:text-gray-400 rounded-md bg-[#F2F2F2] border-[#F2F2F2] "
+            type="text"
+            formControlName="name"
+            placeholder="Type your name..." />
+            @if (signupForm.get('name')?.touched && signupForm.get('name')?.invalid) {
+            <div class="text-red-500 text-sm my-1">
+                @if (signupForm.get('name')?.errors?.['required']) {
+                <div>Name is required.</div>
+                }
+                @if (signupForm.get('name')?.errors?.['minlength']) {
+                <div>Name must be at least 3 characters.</div>
+                }
+                @if (signupForm.get('name')?.errors?.['maxlength']) {
+                <div>Name must be at most 20 characters.</div>
+                }
+            </div>
+            }
+        </div>
+            
+  
+        <!-- Email -->
+        <div class="mb-4">
+            <input
+            class="w-full focus:border-blue-600 focus:border-[1.5px] placeholder:text-gray-400 rounded-md bg-[#F2F2F2] border-[#F2F2F2] "
+            type="email"
+            formControlName="email"
+            placeholder="Type your email..." />
+            @if (signupForm.get('email')?.touched && signupForm.get('email')?.invalid) {
+                <div class="text-red-500 text-sm my-1">
+                  @if (signupForm.get('email')?.errors?.['required']) {
+                    <div>Email is required.</div>
+                  }
+                  @if (signupForm.get('email')?.errors?.['email']) {
+                    <div>Enter a valid email.</div>
+                  }
+                </div>
+              }
+        </div>
+  
+        <!-- Password -->
+        <div class="mb-4">
+            <input
+            class="w-full focus:border-blue-600 focus:border-[1.5px] placeholder:text-gray-400 rounded-md bg-[#F2F2F2] border-[#F2F2F2] "
+            type="password"
+            formControlName="password"
+            placeholder="Type your password..." />
+            @if (signupForm.get('password')?.touched && signupForm.get('password')?.invalid) {
+                <div class="text-red-500 text-sm mb-2">
+                  @if (signupForm.get('password')?.errors?.['required']) {
+                    <div>Password is required.</div>
+                  }
+                  @if (signupForm.get('password')?.errors?.['pattern']) {
+                    <div>Password must start with uppercase and be at least 8 characters.</div>
+                  }
+                </div>
+              }
+        </div>
+  
+        <!-- Re-Password -->
+        <div class="mb-4">
+            <input
+            class="w-full focus:border-blue-600 focus:border-[1.5px] placeholder:text-gray-400 rounded-md bg-[#F2F2F2] border-[#F2F2F2] "
+            type="password"
+            formControlName="rePassword"
+            placeholder="Type your password..." />
+            @if (signupForm.get('rePassword')?.touched && signupForm.get('rePassword')?.invalid) {
+                <div class="text-red-500 text-sm mb-2">
+                  @if (signupForm.get('rePassword')?.errors?.['required']) {
+                    <div>Re-password is required.</div>
+                  }
+                  @if (signupForm.get('rePassword')?.errors?.['notSame']) {
+                    <div>Passwords do not match.</div>
+                  }
+                </div>
+              }
+        </div>
+  
+        <!-- Date of Birth -->
+        <div class="mb-4">
+          <label class="block text-gray-700 font-medium ">Date of Birth:</label>
+          <input
+            class="w-full focus:border-blue-600 focus:border-[1.5px] placeholder:text-gray-400 rounded-md bg-[#F2F2F2] border-[#F2F2F2] "
+            type="date"
+            formControlName="dateOfBirth"
+            placeholder="Type your date of birth..." />
+            @if (signupForm.get('dateOfBirth')?.touched && signupForm.get('dateOfBirth')?.invalid) {
+                <div class="text-red-500 text-sm mb-2">
+                  @if (signupForm.get('dateOfBirth')?.errors?.['required']) {
+                    <div>Date of birth is required.</div>
+                  }
+                </div>
+              }
+        </div>
+  
+        <!-- Gender -->
+        <div class="mb-4">
+            <label class="block text-gray-700 font-medium mb-2">Gender:</label>
+            <div class="flex gap-6">
+              <label class="flex items-center gap-2">
+                <input type="radio" formControlName="gender" value="male" /> Male
+              </label>
+              <label class="flex items-center gap-2">
+                <input type="radio" formControlName="gender" value="female" /> Female
+              </label>
+            </div>
+            @if (signupForm.get('gender')?.touched && signupForm.get('gender')?.invalid) {
+              <div class="text-red-500 text-sm mt-1">Gender is required.</div>
+            }
+          </div>
+  
+        <!-- Submit Button -->
+         @if (errMessage) {
+            <p class="text-red-500 text-center my-3">{{errMessage}}</p>
+         }
+        <button
+          type="submit"
+          class="text-white bg-blue-600 rounded-md p-2 px-5 ">
+          Signup
+        </button>
+      </form>
+  
+      
+    </div>
+  </section>
+  
