@@ -59,4 +59,11 @@ export const routes: Routes = [
     title: 'Post',
     canActivate: [authGuard],
   },
+  {
+    path: '**',
+    loadComponent: () =>
+      import('./components/notfound/notfound.component').then(
+        (m) => m.NotfoundComponent
+      ),
+  }
 ];

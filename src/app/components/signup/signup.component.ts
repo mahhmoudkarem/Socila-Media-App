@@ -28,7 +28,6 @@ export class SignupComponent {
   }
 
   signup():void{
-    console.log(this.signupForm.value);
     if (this.signupForm.valid) {
 
       this.usersService.signup(this.signupForm.value).subscribe({
@@ -41,6 +40,8 @@ export class SignupComponent {
         }
       })
       
+    }else{
+      this.signupForm.markAllAsTouched();
     }
     
   }

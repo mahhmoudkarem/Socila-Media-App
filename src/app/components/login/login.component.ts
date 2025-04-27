@@ -21,7 +21,7 @@ export class LoginComponent {
 
 
   loginUser(){
-    console.log(this.login.value);
+    
     
     if(this.login.valid){
       this.usersService.signin(this.login.value).subscribe({
@@ -33,8 +33,11 @@ export class LoginComponent {
         },
         error:(err)=>{
           this.err = true
+          this.login.markAllAsTouched();
         }
       })
+    }else{
+      this.login.markAllAsTouched();
     }
 
     
